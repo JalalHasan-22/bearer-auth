@@ -1,10 +1,10 @@
 "use strict";
 const bcrypt = require("bcrypt");
-const { verify } = require("jsonwebtoken");
+// const { verify } = require("jsonwebtoken");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-const SECRET = process.env.SECRET;
+const SECRET = process.env.SECRET || "DKJAN";
 
 const Users = (sequelize, DataTypes) => {
   const userModel = sequelize.define("users", {
