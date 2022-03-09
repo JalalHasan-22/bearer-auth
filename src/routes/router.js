@@ -16,7 +16,6 @@ router.get("/secretstuff", bearerAuth, secretStuffHandler);
 
 // Handlers
 async function signupHandler(req, res, next) {
-  //   console.log(base_64.decode(req.headers.authorization.split(" ")[1]));
   let { username, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 14);
