@@ -7,6 +7,7 @@ const router = express.Router();
 const { users } = require("../auth/models/index");
 const basicAuth = require("../auth/middleware/basicAuth");
 const bearerAuth = require("../auth/middleware/bearerAuth");
+const { user } = require("pg/lib/defaults");
 
 // Routes
 router.get("/users", getAllUsers);
@@ -17,11 +18,13 @@ router.get("/secretstuff", bearerAuth, secretStuffHandler);
 // Handlers
 async function signupHandler(req, res, next) {
   let { username, password } = req.body;
+  console.log(username, password);
   try {
     const hashedPassword = await bcrypt.hash(password, 14);
     const newUser = await users.create({
       username: username,
       password: hashedPassword,
+      // token: user.token,
     });
     res.status(201).json(newUser);
   } catch (error) {
